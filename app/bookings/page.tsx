@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function MyBookingsPage() {
+  const router = useRouter();
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -10,16 +12,13 @@ export default function MyBookingsPage() {
     const user = JSON.parse(localStorage.getItem("user") || "{}");
 
     if (!user?.id) {
-      setLoading(false);
+      router.push("/auth/login");
       return;
     }
 
     async function fetchBookings() {
       const res = await fetch("/api/bookings", {
-        method: "GET",
-        headers: {
-          "user-id": user.id,
-        },
+        headers: { "user-id": user.id },
       });
 
       const data = await res.json();
@@ -30,11 +29,10 @@ export default function MyBookingsPage() {
     fetchBookings();
   }, []);
 
-  if (loading) {
+  if (loading)
     return (
       <div className="text-white p-20 text-center text-xl">Loading...</div>
     );
-  }
 
   return (
     <div className="min-h-screen bg-black text-white p-6">
@@ -56,12 +54,11 @@ export default function MyBookingsPage() {
               <p><strong>Time:</strong> {b.time}</p>
 
               <a
-  href={`/api/ticket/${b.id}`}
-  className="mt-4 inline-block bg-blue-600 px-4 py-2 rounded text-white font-semibold"
->
-  Download Ticket
-</a>
-
+                href={`/api/ticket/${b.id}`}
+                className="mt-4 inline-block bg-blue-600 px-4 py-2 rounded text-white font-semibold"
+              >
+                Download Ticket
+              </a>
             </div>
           ))}
         </div>

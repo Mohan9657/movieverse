@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
 
 export default function LoginPage() {
-  const router = useRouter();
+  const router = useRouter();  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  // 🚀 If user is already logged in → send home
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if (user) router.push("/");
+  }, []);
 
   async function handleLogin(e: any) {
     e.preventDefault();
@@ -17,14 +22,10 @@ export default function LoginPage() {
 
       alert("Login successful!");
 
-      // Save token
       localStorage.setItem("token", res.data.token);
-      Cookies.set("token", res.data.token);
-
-      // Save user info
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      router.push("/");
+      router.push("/"); // go home after login
     } catch (err) {
       alert("Invalid email or password");
     }
@@ -41,18 +42,35 @@ export default function LoginPage() {
           <input
             className="p-3 bg-gray-800 text-white rounded"
             placeholder="Email"
+            type="email"
+            value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
 
           <input
             className="p-3 bg-gray-800 text-white rounded"
             placeholder="Password"
             type="password"
+            value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
 
-          <button className="bg-blue-600 text-white p-3 rounded">Login</button>
+          <button className="bg-blue-600 text-white p-3 rounded">
+            Login
+          </button>
         </form>
+
+        <p className="mt-4 text-center text-gray-400">
+          New user?{" "}
+          <span
+            className="text-blue-500 cursor-pointer"
+            onClick={() => router.push("/auth/register")}
+          >
+            Register
+          </span>
+        </p>
       </div>
     </div>
   );

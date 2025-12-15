@@ -48,7 +48,8 @@ export default function BookingPage() {
 
     if (!user?.id) {
       alert("Please login to book tickets");
-      router.push("/auth/login");
+      router.push(`/auth/login?next=/book/${id}`);
+
       return;
     }
 
