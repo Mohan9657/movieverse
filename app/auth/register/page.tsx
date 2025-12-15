@@ -2,13 +2,10 @@
 
 import { useState } from "react";
 import axios from "axios";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const params = useSearchParams();
-
-  const nextUrl = params.get("next") || "/";
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -16,26 +13,26 @@ export default function RegisterPage() {
 
   async function handleRegister(e: any) {
     e.preventDefault();
-
     try {
       const res = await axios.post("/api/auth/register", {
         name,
         email,
-        password
+        password,
       });
 
-      alert("Registration Successful!");
-
-      router.push(`/auth/login?next=${nextUrl}`);
+      alert("Registration successful! Please login.");
+      router.push("/auth/login");
     } catch (err: any) {
-      alert("Registration failed");
+      alert(err.response?.data?.error || "Registration failed");
     }
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-black">
       <div className="bg-[#121212] p-8 rounded-xl shadow-lg w-full max-w-md border border-gray-800">
-        <h1 className="text-3xl font-bold mb-6 text-center text-white">Register</h1>
+        <h1 className="text-3xl font-bold mb-6 text-center text-white">
+          Register
+        </h1>
 
         <form onSubmit={handleRegister} className="flex flex-col gap-4">
           <input
@@ -69,13 +66,13 @@ export default function RegisterPage() {
           </button>
         </form>
 
-        <p className="text-center text-gray-400 mt-4">
-          Already have an account?
+        <p className="text-center mt-4 text-gray-400">
+          Already have an account?{" "}
           <span
-            className="text-blue-400 cursor-pointer"
-            onClick={() => router.push(`/auth/login?next=${nextUrl}`)}
+            className="text-blue-500 cursor-pointer"
+            onClick={() => router.push("/auth/login")}
           >
-            {" "}Login
+            Login
           </span>
         </p>
       </div>
