@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 MovieVerse — Online Movie Ticket Booking Platform
 
-## Getting Started
+MovieVerse is a full-stack modern movie ticket booking web application built with **Next.js 16**, **Tailwind CSS**, **MongoDB**, and **Prisma ORM**.  
+Users can browse trending movies(from **TMDB API**), view details(like actors names ,rating ,about,trailer), book seats, make payment (fake flow), and download a **QR-code-based e-ticket**.
 
-First, run the development server:
+🚀 **Live Demo:** https://movieverse-zeta-bice.vercel.app/  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🔐 Authentication
+- User **Register** and **Login**
+- Password hashing using **bcryptjs**
+- JWT-based authentication
+- Protected routes (My Bookings)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🎥 Movie Browsing
+- Upcoming & Trending movies fetched from **TMDB API**
+- Movie details page with trailer & overview
+- Fully responsive and clean UI
 
-## Learn More
+### 🎫 Ticket Booking
+- Select:
+  - Theatre
+  - Date
+  - Time
+  - Multiple seats
+- Booking stored in MongoDB using Prisma
 
-To learn more about Next.js, take a look at the following resources:
+### 💳 Payment Flow
+- Simple fake payment page to simulate real payment
+- Generates booking on successful payment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 📄 Downloadable Movie Ticket (PDF)
+- PDF ticket generated using **pdf-lib**
+- Includes:
+  - Movie name  
+  - Theatre  
+  - Time & date  
+  - Seats  
+  - QR Code  
+- Works perfectly on deployed version
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🧾 My Bookings Page
+- Shows all previously booked tickets
+- Button to **Download Ticket**
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🛠️ Tech Stack
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### **Frontend**
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS
+
+### **Backend**
+- Next.js API Routes
+- Prisma ORM
+- MongoDB Atlas
+
+### **Other Tools**
+- Axios
+- JWT Authentication
+- Bcryptjs
+- pdf-lib
+- qrcode
+- TMDB API
+
+---
+
+Developer
+
+Vulli Mohan
+Full Stack Developer
+India
